@@ -1,0 +1,70 @@
+<div class="container" style="max-width: 600px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: 1rem; flex-wrap: wrap;">
+    <h2>Agencia de Vuelos</h2>
+    <div style="display: flex; gap: 0.75rem;">
+      <button (click)="toggleReservas()" style="width: auto; padding: 0.5rem 1rem; margin: 0; background: var(--primary);">Ver reservas</button>
+      <button (click)="logout()" style="width: auto; padding: 0.5rem 1rem; margin: 0; background: var(--error);">Salir</button>
+    </div>
+  </div>
+  <p class="subtitle">Reserva tu próximo destino</p>
+
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message" style="text-align: center; margin-bottom: 1rem;">
+    {{ errorMessage }}
+  </div>
+
+  <form (ngSubmit)="bookFlight()">
+    <div class="form-group">
+      <input type="text" id="origin" name="origin" [(ngModel)]="flight.origin" required placeholder=" ">
+      <label for="origin">Origen</label>
+    </div>
+
+    <div class="form-group">
+      <input type="text" id="destination" name="destination" [(ngModel)]="flight.destination" required placeholder=" ">
+      <label for="destination">Destino</label>
+    </div>
+
+    <div style="display: flex; gap: 1rem;">
+      <div class="form-group" style="flex: 1;">
+        <input type="date" id="departure" name="departure_date" [(ngModel)]="flight.departure_date" required placeholder=" ">
+        <label for="departure">Fecha de Ida</label>
+      </div>
+
+      <div class="form-group" style="flex: 1;">
+        <input type="date" id="return" name="return_date" [(ngModel)]="flight.return_date" required placeholder=" ">
+        <label for="return">Fecha de Vuelta</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="passengers" name="passengers" [(ngModel)]="flight.passengers" required min="1" placeholder=" ">
+      <label for="passengers">Pasajeros</label>
+    </div>
+
+    <button type="submit">Reservar Vuelo</button>
+  </form>
+
+  <!-- Sección de reservas -->
+  <div *ngIf="mostrarReservas" style="margin-top: 2rem;">
+    <h3 style="margin-bottom: 1rem;">Mis Reservas</h3>
+
+    <div *ngIf="reservas.length === 0" style="text-align: center; color: gray;">
+      No hay reservas disponibles.
+    </div>
+
+    <div *ngFor="let reserva of reservas" style="border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+      <p><strong>ID:</strong> {{ reserva.reserva_id }}</p>
+      <p><strong>Estado:</strong> {{ reserva.estado }}</p>
+      <p><strong>Origen:</strong> {{ reserva.origin }}</p>
+      <p><strong>Destino:</strong> {{ reserva.destination }}</p>
+      <p><strong>Ida:</strong> {{ reserva.departure_date }}</p>
+      <p><strong>Vuelta:</strong> {{ reserva.return_date }}</p>
+      <p><strong>Pasajeros:</strong> {{ reserva.passengers }}</p>
+      <p><strong>Total:</strong> ${{ reserva.total }}</p>
+      <p><strong>Mensaje:</strong> {{ reserva.mensaje }}</p>
+    </div>
+  </div>
+</div>

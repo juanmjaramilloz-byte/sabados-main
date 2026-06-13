@@ -1,0 +1,20 @@
+.reservations-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.reservations-table th,
+.reservations-table td {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.reservations-table th {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.reservations-table tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
